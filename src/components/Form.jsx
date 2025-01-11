@@ -1,3 +1,6 @@
+import {Checkbox} from "./Checkbox";
+import {TextInput} from "./TextInput";
+
 const formDataIntoJSON = formData => {
     const body = {}
 
@@ -20,7 +23,7 @@ const formDataIntoJSON = formData => {
     return body;
 }
 
-export function Form({children}) {
+export function Form({formStructure, children}) {
     const handleSubmit = e => {
         e.preventDefault();
 
@@ -39,6 +42,21 @@ export function Form({children}) {
 
     return (
         <form onSubmit={handleSubmit}>
+            {
+                formStructure.map((item, i) => {
+                    if(item.type === "checkbox") {
+                        return item.children.map((child, j) => (
+                            <Checkbox label={child.label} key={i + j} value={child.value} name={item.name} />
+                        ))
+                    }
+                    else if(item.type === "text") {
+                        return (
+                            <TextInput label={item.label} key={i} name={item.name} />
+                        )
+                    }
+                    return null;
+                })
+            }
             {children}
         </form>
     )
