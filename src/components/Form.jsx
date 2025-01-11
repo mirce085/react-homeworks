@@ -26,11 +26,14 @@ export function Form({children}) {
 
         const formData = new FormData(e.target);
         const json = formDataIntoJSON(formData);
-        const regex = new RegExp("/[a-z]{6,16}/");
-        if(regex.test(json["username"])) {
-            console.log("username approved");
-        }
+        const regex = new RegExp("^[a-z]{6,16}$");
         console.log(json);
+        if(!regex.test(json["username"])) {
+            console.log("username not approved");
+        }
+        if(json["plugins"].length > 3 || json["plugins"].length < 1) {
+            console.log("checkboxes not approved");
+        }
     }
 
 
