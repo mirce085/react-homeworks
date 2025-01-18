@@ -1,11 +1,6 @@
 import './App.css';
+import ReduxCounter from './components/ReduxCounter/ReduxCounter';
 
-function App() {
-  return (
-    <>
-
-    </>
-  );
-}
+const App = () => <ReduxCounter />;
 
 export default App;
